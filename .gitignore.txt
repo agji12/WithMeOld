@@ -82,6 +82,9 @@ local.properties
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
+### API KEY ###
+src/main/resources/key/RiotApiKey
+
 ### Java ###
 # Compiled class file
 *.class
