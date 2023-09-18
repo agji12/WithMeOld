@@ -53,7 +53,11 @@ public class TestService {
 	            };
 	            String responseBody = httpClient.execute(httpGet, responseHandler);
 	            
+	            SummonerName sName = gson.fromJson(responseBody, SummonerName.class);
+	            
 	            System.out.println(responseBody);
+	            System.out.println(sName);
+	            
 	            return responseBody;
 		} catch(Exception e) {
 			e.printStackTrace();
