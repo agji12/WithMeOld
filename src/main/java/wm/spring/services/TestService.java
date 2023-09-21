@@ -27,8 +27,6 @@ public class TestService {
 	
 	public String callAPISummonerByName(String summonerName) {
 		
-		//SummonerName result = new SummonerName("a",1,12,"a","a","a",1);
-		
 		String serverUrl = "https://kr.api.riotgames.com";
 		
 		try {
@@ -56,10 +54,45 @@ public class TestService {
 	            SummonerName sName = gson.fromJson(responseBody, SummonerName.class);
 	            
 	            System.out.println(responseBody);
-	            System.out.println(sName);
 	            
 	            return responseBody;
 		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public String callAPIRankById(String summonerId) {
+		String serverUrl = "https://kr.api.riotgames.com";
+		
+		try {
+			CloseableHttpClient httpClient = HttpClients.createDefault();
+			HttpGet httpGet = new HttpGet(serverUrl + "/lol/league/v4/entries/by-summoner/" + summonerId + "?api_key=" + riotApiKey);
+			
+			 System.out.println("Executing request " + httpGet.getRequestLine());
+			 ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+
+	                @Override
+	                public String handleResponse(
+	                        final HttpResponse response) throws ClientProtocolException, IOException {
+	                    int status = response.getStatusLine().getStatusCode();
+	                    if (status >= 200 && status < 300) {
+	                        HttpEntity entity = response.getEntity();
+	                        return entity != null ? EntityUtils.toString(entity) : null;
+	                    } else {
+	                        throw new ClientProtocolException("Unexpected response status: " + status);
+	                    }
+	                }
+
+	            };
+	            String responseBody = httpClient.execute(httpGet, responseHandler);
+	            
+	            //SummonerName sName = gson.fromJson(responseBody, SummonerName.class);
+	            
+	            System.out.println(responseBody);
+	            
+	            return responseBody;
+		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		}

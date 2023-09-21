@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>With Me</title>
 <!-- jQeury -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- bootstrap -->
@@ -17,14 +17,16 @@
 	<form action="/toTestJSP" method="post">
 		<button>테스트용</button>
 	</form>
-	<div class="container">
-		<div class="titleBox">
-			<h1>With Me</h1>
+	<form action="/record/toSearchRecord" method="post">
+		<div class="container">
+			<div class="titleBox">
+				<h1>With Me</h1>
+			</div>
+			<div class="inputBox input-group mb-3">
+				<input class="form-control" type="text" name="summonerName" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
+				<button class="btn btn-outline-secondary" id="searchBtn">Button</button>
+			</div>
 		</div>
-		<div class="inputBox input-group mb-3">
-			<input class="form-control" type="text" placeholder="소환사명을 입력해 주세요" aria-label="default input example">
-			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-		</div>
-	</div>
+	</form>
 </body>
 </html>

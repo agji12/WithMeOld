@@ -19,6 +19,11 @@
 		<div id="revisionDate">업데이트 날짜 : </div>
 		<div id="summonerLevel">레벨 : </div>
 	</fieldset>
+	<fieldset>
+		<legend>티어 정보</legend>
+		<div id="soloRank">솔로 랭크 : <input name="sysname" value="${summonerTier}"></div>
+		<div id="freeRank">자유 랭크 : </div>
+	</fieldset>
 </body>
 <script>
 	$("#btn").on("click", function(){
