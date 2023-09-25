@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
-import wm.spring.dto.SummonerName;
+import wm.spring.dto.SummonerNameDTO;
 
 @Service
 public class TestService {
@@ -51,7 +51,7 @@ public class TestService {
 	            };
 	            String responseBody = httpClient.execute(httpGet, responseHandler);
 	            
-	            SummonerName sName = gson.fromJson(responseBody, SummonerName.class);
+	            SummonerNameDTO sName = gson.fromJson(responseBody, SummonerNameDTO.class);
 	            
 	            System.out.println(responseBody);
 	            

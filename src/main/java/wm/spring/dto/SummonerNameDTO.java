@@ -1,6 +1,6 @@
 package wm.spring.dto;
 
-public class SummonerName {
+public class SummonerNameDTO {
 	private String accountId;
 	private int profileIconId;
 	private long revisionDate;
@@ -9,8 +9,8 @@ public class SummonerName {
 	private String puuid;
 	private long summonerLevel;
 	
-	public SummonerName() {}
-	public SummonerName(String accountId, int profileIconId, long revisionDate, String name, String id, String puuid,
+	public SummonerNameDTO() {}
+	public SummonerNameDTO(String accountId, int profileIconId, long revisionDate, String name, String id, String puuid,
 			long summonerLevel) {
 		super();
 		this.accountId = accountId;
