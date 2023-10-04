@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 
-import wm.spring.dto.SummonerNameDTO;
+import wm.spring.dto.SummonerInfoDTO;
 import wm.spring.dto.SummonerTierDTO;
 import wm.spring.services.RecordService;
 
@@ -31,7 +31,7 @@ public class RecordController {
 		String summonerInfo = recordService.callAPISummonerByName(summonerName);
 
 		// 소환사 이름 티어 정보 (솔로랭크, 자유랭크)
-		SummonerNameDTO sName = gson.fromJson(summonerInfo, SummonerNameDTO.class);
+		SummonerInfoDTO sName = gson.fromJson(summonerInfo, SummonerInfoDTO.class);
 		String summonerId = sName.getId();
 		List<SummonerTierDTO> summonerTier = recordService.callAPIRankById(summonerId);
 

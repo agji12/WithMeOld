@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import wm.spring.dto.SummonerNameDTO;
+import wm.spring.dto.SummonerInfoDTO;
 import wm.spring.services.TestService;
 
 @Controller
@@ -27,7 +27,7 @@ public class TestController {
 		System.out.println(summonerName);
 		// 소환사 이름 검색 정보 (닉네임, 레벨, 아이콘ID)
 		String result = testService.callAPISummonerByName(summonerName);
-		SummonerNameDTO sName = gson.fromJson(result, SummonerNameDTO.class);
+		SummonerInfoDTO sName = gson.fromJson(result, SummonerInfoDTO.class);
 		String summonerId = sName.getId();
 		
 		// 소환사 이름 티어 정보

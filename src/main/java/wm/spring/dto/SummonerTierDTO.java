@@ -13,15 +13,10 @@ public class SummonerTierDTO {
 	private int leaguePoints;
 	private int wins;
 	private int losses;
-	private boolean hotStreak;
-	private boolean veteran;
-	private boolean freshBlood;
-	private boolean inactive;
 	
 	public SummonerTierDTO() {}	
 	public SummonerTierDTO(String leagueId, String summonerId, String summonerName, String queueType, String tier,
-			String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood,
-			boolean inactive) {
+			String rank, int leaguePoints, int wins, int losses) {
 		super();
 		this.leagueId = leagueId;
 		this.summonerId = summonerId;
@@ -32,10 +27,6 @@ public class SummonerTierDTO {
 		this.leaguePoints = leaguePoints;
 		this.wins = wins;
 		this.losses = losses;
-		this.hotStreak = hotStreak;
-		this.veteran = veteran;
-		this.freshBlood = freshBlood;
-		this.inactive = inactive;
 	}
 
 	public String getLeagueId() {
@@ -91,30 +82,6 @@ public class SummonerTierDTO {
 	}
 	public void setLosses(int losses) {
 		this.losses = losses;
-	}
-	public boolean isHotStreak() {
-		return hotStreak;
-	}
-	public void setHotStreak(boolean hotStreak) {
-		this.hotStreak = hotStreak;
-	}
-	public boolean isVeteran() {
-		return veteran;
-	}
-	public void setVeteran(boolean veteran) {
-		this.veteran = veteran;
-	}
-	public boolean isFreshBlood() {
-		return freshBlood;
-	}
-	public void setFreshBlood(boolean freshBlood) {
-		this.freshBlood = freshBlood;
-	}
-	public boolean isInactive() {
-		return inactive;
-	}
-	public void setInactive(boolean inactive) {
-		this.inactive = inactive;
 	}
 	
 }

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import wm.spring.dto.SummonerNameDTO;
+import wm.spring.dto.SummonerInfoDTO;
 import wm.spring.dto.SummonerTierDTO;
 
 @Service
@@ -58,7 +58,7 @@ public class RecordService {
 			};
 			String responseBody = httpClient.execute(httpGet, responseHandler);
 
-			SummonerNameDTO sName = gson.fromJson(responseBody, SummonerNameDTO.class);
+			SummonerInfoDTO sName = gson.fromJson(responseBody, SummonerInfoDTO.class);
 
 			System.out.println(responseBody);
 
