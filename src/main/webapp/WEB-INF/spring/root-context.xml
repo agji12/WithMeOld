@@ -13,4 +13,7 @@
 	<!-- Api key -->
 	<context:property-placeholder location="classpath:/key/RiotApiKey.properties" />
 	
+	<!-- Gson -->
+	<bean class="com.google.gson.Gson" />
+	
 </beans>

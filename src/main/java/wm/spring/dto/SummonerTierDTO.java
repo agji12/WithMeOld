@@ -17,14 +17,11 @@ public class SummonerTierDTO {
 	private boolean veteran;
 	private boolean freshBlood;
 	private boolean inactive;
-	private Timestamp regDate;
-	private Timestamp modDate;
-	private Timestamp delDate;
 	
-	public SummonerTierDTO() {}
+	public SummonerTierDTO() {}	
 	public SummonerTierDTO(String leagueId, String summonerId, String summonerName, String queueType, String tier,
 			String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood,
-			boolean inactive, Timestamp regDate, Timestamp modDate, Timestamp delDate) {
+			boolean inactive) {
 		super();
 		this.leagueId = leagueId;
 		this.summonerId = summonerId;
@@ -39,10 +36,8 @@ public class SummonerTierDTO {
 		this.veteran = veteran;
 		this.freshBlood = freshBlood;
 		this.inactive = inactive;
-		this.regDate = regDate;
-		this.modDate = modDate;
-		this.delDate = delDate;
 	}
+
 	public String getLeagueId() {
 		return leagueId;
 	}
@@ -121,23 +116,5 @@ public class SummonerTierDTO {
 	public void setInactive(boolean inactive) {
 		this.inactive = inactive;
 	}
-	public Timestamp getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
-	}
-	public Timestamp getModDate() {
-		return modDate;
-	}
-	public void setModDate(Timestamp modDate) {
-		this.modDate = modDate;
-	}
-	public Timestamp getDelDate() {
-		return delDate;
-	}
-	public void setDelDate(Timestamp delDate) {
-		this.delDate = delDate;
-	};
 	
 }
