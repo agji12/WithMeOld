@@ -7,8 +7,41 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="username" value="WM" />
+		<property name="password" value="WM" />
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="driverClassName"
+			value="oracle.jdbc.OracleDriver" />
+	</bean>
+
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations"
+			value="classpath:/mappers/*-mapper.xml" />
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
+	</bean>
+
+	<!--히라키cp에 transaction을 주입 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	
 	<context:component-scan base-package="wm.spring.services" />
+	<context:component-scan base-package="wm.spring.repositories" />
 	
 	<!-- Api key -->
 	<context:property-placeholder location="classpath:/key/RiotApiKey.properties" />
