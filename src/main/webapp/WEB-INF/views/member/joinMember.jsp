@@ -58,16 +58,18 @@
 		let resultEmail = regexEmail.exec(email);
 		console.log(email);
 		if(resultEmail){
+			$(".validCheck").html("");
 			$("#authBtn").attr("disabled", false);
 		}else {
 			$(".validCheck").html("이메일의 형식이 일치하지 않습니다.").css({"color":"red", "font-size":"small"});
+			$("#authBtn").attr("disabled", true);
 		}
 	})
 
 	$("#authBtn").on("click", function(){
-		document.getElementById("authBox").style.display="block";
+		//document.getElementByClassName("authBox").style.display="block";
+		$(".authBox").show();
 	})
-	
 	
 </script>
 </html>
