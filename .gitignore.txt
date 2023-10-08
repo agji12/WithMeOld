@@ -85,6 +85,9 @@ local.properties
 ### API KEY ###
 src/main/resources/key/RiotApiKey
 
+### Config ###
+src/main/resources/config/Mail
+
 ### Java ###
 # Compiled class file
 *.class

@@ -15,7 +15,9 @@
 <style>
 	.mainContainer{margin-top:50px; width:70%;}
 	.authBtnDiv{text-align:center;}
+	#authBtn{display:none;}
 	.authBox{display:none;}
+	.secondPage{display:none;}
 </style>
 <body>
 	<header>
@@ -24,21 +26,37 @@
 	<main>
 		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
 			<h1>With Me 회원 가입</h1>
-			<div class="emailBox">
-				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">이메일 주소</label>
-					<input type="email" class="form-control" id="email" placeholder="name@example.com">
-					<div class="validCheck"></div>
+			<div class="firstPage">
+				<div class="emailBox">
+					<div class="mb-3">
+						<label for="exampleFormControlInput1" class="form-label">이메일 주소</label>
+						<input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+						<div class="validCheck"></div>
+					</div>
+				</div>
+				<div class="authBox">	
+					<div class="mb-3">
+						<label for="exampleFormControlInput1" class="form-label">인증 번호</label>
+						<input class="form-control" id="authInput" type="text" placeholder="6자리 인증 번호를 입력해 주세요" aria-label="default input example">
+					</div>
+				</div>
+				<div class="mb-3 authBtnDiv">
+					<button type="button" id="sendMailBtn" class="btn btn-primary" disabled>다음</button>
+					<button type="button" id="authBtn" class="btn btn-primary">인증하기</button>
 				</div>
 			</div>
-			<div class="authBox">	
+			<div class="secondPage">
 				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">인증 번호</label>
-					<input class="form-control" id="authInput" type="text" placeholder="~자리 인증 번호를 입력해 주세요" aria-label="default input example">
+					<label for="inputPassword5" class="form-label">비밀번호</label>
+					<input type="password" id="password" class="form-control" aria-describedby="passwordHelpBlock">
+					<div id="passwordHelpBlock" class="form-text">
+  						Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+					</div>
 				</div>
-			</div>
-			<div class="mb-3 authBtnDiv">
-				<button type="button" id="authBtn" class="btn btn-primary" disabled>인증하기</button>
+				<div class="mb-3">
+					<label for="inputPassword5" class="form-label">비밀번호 재입력</label>
+					<input type="password" id="passwordCheck" class="form-control" aria-describedby="passwordHelpBlock">
+				</div>
 			</div>
 			<div class="mb-3">
 				<a class="icon-link icon-link-hover" href="/member/toLogin">
@@ -51,25 +69,65 @@
 	</main>
 </body>
 <script>
+	let authNumber;
+	
+	// 이메일 형식 확인
 	let regexEmail = /.+?@.+?\.com/;
 	
 	$("#email").on("keyup", function(){
 		let email = $("#email").val();
 		let resultEmail = regexEmail.exec(email);
-		console.log(email);
+		
 		if(resultEmail){
 			$(".validCheck").html("");
-			$("#authBtn").attr("disabled", false);
+			$("#sendMailBtn").attr("disabled", false);
 		}else {
 			$(".validCheck").html("이메일의 형식이 일치하지 않습니다.").css({"color":"red", "font-size":"small"});
-			$("#authBtn").attr("disabled", true);
+			$("#sendMailBtn").attr("disabled", true);
 		}
 	})
-
-	$("#authBtn").on("click", function(){
-		//document.getElementByClassName("authBox").style.display="block";
-		$(".authBox").show();
+	
+	// 이메일 전송
+	$("#sendMailBtn").on("click", function(){
+		let email = $("#email").val();
+				
+		$.ajax({
+			url:"/member/toMailSend",
+			type:"post",
+			async: false,
+			dataType:"json",
+			data:{
+				email:email
+			}
+		}).done(function(resp){
+			if(resp){
+				alert("메일이 전송 되었습니다!");
+				authnumber = resp;
+				
+				// 숫자 인증 칸 보여주기
+				$(".authBox").show();
+				$("#sendMailBtn").hide();
+				$("#authBtn").show();
+			}
+		})
 	})
+	
+	// 인증 메일 일치 여부 확인
+	$("#authBtn").on("click", function(){
+		let authInput = $("#authInput").val();
+		
+		if(authInput == authnumber){
+			$(".firstPage").hide();
+			$(".secondPage").show();
+		}else{
+			alert("인증 번호가 일치하지 않습니다.\n다시 입력하여 주시기 바랍니다!");
+			$("#authInput").val("");
+		}
+	})
+	
+	// 비밀번호 및 재입력 일치 여부 확인
+	// 이름과 생년월일 입력받아 db 저장
+	
 	
 </script>
 </html>
