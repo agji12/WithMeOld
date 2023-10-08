@@ -72,6 +72,13 @@ local.properties
 # $ git config --global mergetool.keepBackup false
 *.orig
 
+### API KEY ###
+src/main/resources/key/RiotApiKey.properties
+
+### Config ###
+src/main/resources/config/Mail.properties
+src/main/resources/test/hello.properties
+
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
 *.BASE.*
@@ -81,13 +88,6 @@ local.properties
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
-
-### API KEY ###
-src/main/resources/key/RiotApiKey.properties
-
-### Config ###
-src/main/resources/config/Mail.properties
-src/main/resources/test/hello.properties
 
 ### Java ###
 # Compiled class file
