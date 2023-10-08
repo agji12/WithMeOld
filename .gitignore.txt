@@ -83,10 +83,10 @@ local.properties
 *_REMOTE_*.txt
 
 ### API KEY ###
-src/main/resources/key/RiotApiKey
+src/main/resources/key/RiotApiKey.properties
 
 ### Config ###
-src/main/resources/config/Mail
+src/main/resources/config/Mail.properties
 
 ### Java ###
 # Compiled class file
