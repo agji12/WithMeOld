@@ -87,6 +87,7 @@ src/main/resources/key/RiotApiKey.properties
 
 ### Config ###
 src/main/resources/config/Mail.properties
+src/main/resources/test/hello.properties
 
 ### Java ###
 # Compiled class file
