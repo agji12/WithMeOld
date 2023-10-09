@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import wm.spring.dto.MemberDTO;
 import wm.spring.services.MailSendService;
 import wm.spring.services.MemberService;
 
@@ -37,6 +38,13 @@ public class MemberController {
 		String authNumber = mailSendService.sendMail(email);
 		
 		return authNumber;
+	}
+	
+	@RequestMapping("insertMember")
+	public String insertMember(MemberDTO dto) {
+		memberService.insertMember(dto);
+		System.out.println("가입 성공");
+		return "/";
 	}
 	
 }
