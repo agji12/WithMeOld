@@ -38,7 +38,7 @@ public class MailSendService {
 		
 		// 메일 내용
 		String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 숫자를 입력해 주세요.</p>"
-                + "<h3>" + authNumber + "</h3>";
+                + "<h2>" + authNumber + "</h2>";
 		
 		try {
             MimeMessage mail = mailSender.createMimeMessage();

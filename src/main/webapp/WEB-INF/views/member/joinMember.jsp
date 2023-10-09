@@ -215,7 +215,7 @@
 		let todayYear = today.getFullYear(); // 올해 연도
 		
 		if (birthday.length == 8) {
-			// 연도의 경우 1950 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+			// 연도의 경우 1950 보다 작거나 todayYear 보다 크다면 false를 반환합니다.
 			if (year < 1950 || year > todayYear){
 				$(".birthdayValidCheck").html("<i class='bi bi-exclamation-circle'></i> 연도를 정확하게 입력해 주세요").css({"color":"red", "font-size":"small"});
 				return false;

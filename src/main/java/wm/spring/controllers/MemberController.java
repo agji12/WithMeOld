@@ -34,7 +34,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("toMailSend")
 	public String toMailSend(String email) {
-		System.out.println(email);
 		String authNumber = mailSendService.sendMail(email);
 		
 		return authNumber;
