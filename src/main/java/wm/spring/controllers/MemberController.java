@@ -52,10 +52,15 @@ public class MemberController {
 	
 	// 회원가입
 	@RequestMapping("signUp")
-	public String signUp(MemberDTO dto) throws Exception {
-		memberService.signUp(dto);
-		System.out.println("가입 성공");
-		return "redirect:/";
+	public String signUp(MemberDTO dto, RedirectAttributes rttr) throws Exception {
+		int signUpSuccess = memberService.signUp(dto);
+		
+		if(signUpSuccess > 0) {			
+			rttr.addFlashAttribute("signUpSuccess", "true");
+			return "redirect:/member/toSignUp";
+		}else {
+			return "error";
+		}
 	}
 	
 	// 로그인

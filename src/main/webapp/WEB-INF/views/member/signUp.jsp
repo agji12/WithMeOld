@@ -21,6 +21,7 @@
 	.secondPage{display:none;}
 	.thirdPage{display:none;}
 	.emailCheckPage{display:none;}
+	.signInSuccessPage{display:none;}
 	.label{font-weight:bold;}
 	.birthdayBox{display:flex;}
 </style>
@@ -59,7 +60,7 @@
 					<div class="passwordValidCheck"></div>
 				</div>
 				<div class="col-12 col-lg-8 mb-3">
-					<label for="inputPassword5" class="form-label">비밀번호 재입력</label>
+					<label for="inputPassword5" class="form-label label">비밀번호 재입력</label>
 					<input type="password" id="passwordCheck" class="form-control password" aria-describedby="passwordHelpBlock">
 				</div>
 				<div class="col-12 col-lg-8 mb-3 btnDiv">
@@ -84,7 +85,7 @@
   					<div class="birthdayValidCheck"></div>
 				</div>
 				<div class="col-12 col-lg-8 mb-3 btnDiv">
-					<button type="submit" id="signUpBtn" class="btn btn-primary">가입하기</button>
+					<button type="submit" id="signUpBtn" class="btn btn-primary" disabled>가입하기</button>
 				</div>
 			</div>
 			<div class="emailCheckPage mb-3">
@@ -166,6 +167,7 @@
 			}
 		}).done(function(resp){
 			if(authInput == authNumber && resp == false){
+				$("#email").attr("disabled", false); // disabled를 풀어줘야 form에서 값이 넘어감
 				$(".firstPage").hide();
 				$(".secondPage").show();
 			}else if(authInput == authNumber && resp == true){
@@ -205,6 +207,8 @@
 	$("#nextBtn").on("click", function(){
 		$(".secondPage").hide();
 		$(".thirdPage").show();
+		// 다른 페이지에서 엔터 누르면 signUpBtn이 눌려서 disabled 설정해둠
+		$("#signUpBtn").attr("disabled", false);
 	})
 	
 	// 닉네임 유효성 검사
@@ -303,6 +307,12 @@
 			return false;
 		}
 	})
+	
+	// 회원 가입 완료 시
+	if(${signUpSuccess == "true"}) {
+		$(".firstPage").hide();
+		$(".signInSuccessPage").show();
+	}
 	
 </script>
 </html>
