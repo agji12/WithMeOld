@@ -74,13 +74,12 @@ local.properties
 
 ### API KEY ###
 src/main/resources/key/**
-src/main/resources/key
-src/main/resources/key/
 src/main/resources/key/RiotApiKey.properties
 
 ### Config ###
 src/main/resources/config/**
 src/main/resources/config/Mail.properties
+*.properties
 
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
