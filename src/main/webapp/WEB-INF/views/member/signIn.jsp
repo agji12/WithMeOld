@@ -76,7 +76,7 @@
 	})
 
 	// 로그인 정보가 일치하지 않을 때
-	if(${signInResult == "false"}){
+	if(${signInSuccess == "false"}){
 		alert("이메일과 비밀번호를 다시 확인하여 주시기 바랍니다!");
 	}
 	

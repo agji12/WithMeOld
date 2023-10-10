@@ -20,6 +20,7 @@
 	.authBox{display:none;}
 	.secondPage{display:none;}
 	.thirdPage{display:none;}
+	.emailCheckPage{display:none;}
 	.label{font-weight:bold;}
 	.birthdayBox{display:flex;}
 </style>
@@ -30,7 +31,9 @@
 	<main>
 		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
 		<form action="/member/signUp" method="post">
-			<h1>With Me 회원 가입</h1>
+			<div class="mb-3">
+				<h1 style="font-weight:bold;">With Me 회원 가입</h1>
+			</div>
 			<div class="firstPage">
 				<div class="col-12 col-lg-8 mb-3 emailBox">
 					<label for="exampleFormControlInput1" class="form-label label">이메일 주소</label>
@@ -74,7 +77,7 @@
 				</div>
 				<div class="col-12 col-lg-8 mb-3">
   					<label for="exampleFormControlInput1" class="form-label label">생년월일</label>
-  					<input type="text" class="form-control" id="birthday" name="birthday" maxlength="8">
+  					<input type="text" class="form-control" id="birthday" name="birthday" maxlength="8" oninput="inputOnlyNumber(this)">
   					<div id="passwordHelpBlock" class="form-text">
 						연도/월/일 순으로 입력해 주세요!
 					</div>
@@ -84,7 +87,15 @@
 					<button type="submit" id="signUpBtn" class="btn btn-primary">가입하기</button>
 				</div>
 			</div>
-			<div class="mb-3">
+			<div class="emailCheckPage mb-3">
+				<h3>이미 존재하는 이메일입니다.</h3>
+				아래의 링크를 통해 로그인을 할 수 있습니다!
+			</div>
+			<div class="signInSuccessPage mb-3">
+				<h3>회원 가입을 축하합니다! <i class="bi bi-emoji-smile"></i></h3>
+				아래의 링크를 통해 로그인을 할 수 있습니다!
+			</div>
+			<div class="toSignInBox mb-3">
 				<a class="icon-link icon-link-hover" href="/member/toSignIn">
  			 		다시 로그인하러 가기<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
   					<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -129,10 +140,10 @@
 			}
 		}).done(function(resp){
 			if(resp){
-				alert("메일이 전송 되었습니다!");
-				authnumber = resp;
+				authNumber = resp;
 				
 				// 숫자 인증 칸 보여주기
+				$("#email").attr("disabled", true);
 				$(".authBox").show();
 				$("#sendMailBtn").hide();
 				$("#authBtn").show();
@@ -142,15 +153,30 @@
 	
 	// 인증 메일 일치 여부 확인
 	$("#authBtn").on("click", function(){
+		let email = $("#email").val();
 		let authInput = $("#authInput").val();
 		
-		if(authInput == authnumber){
-			$(".firstPage").hide();
-			$(".secondPage").show();
-		}else{
-			alert("인증 번호가 일치하지 않습니다.\n다시 입력하여 주시기 바랍니다!");
-			$("#authInput").val("");
-		}
+		// 이메일 중복 검사
+		$.ajax({
+			url:"/member/emailCheck",
+			type:"post",
+			dataType:"json",
+			data:{
+				email:email
+			}
+		}).done(function(resp){
+			if(authInput == authNumber && resp == false){
+				$(".firstPage").hide();
+				$(".secondPage").show();
+			}else if(authInput == authNumber && resp == true){
+				$(".firstPage").hide();
+				$(".emailCheckPage").show();
+			}else{
+				alert("인증 번호가 일치하지 않습니다.\n다시 입력하여 주시기 바랍니다!");
+				$("#authInput").val("");
+			}
+		})
+		
 	})
 	
 	// 비밀번호 유효성 검사
@@ -185,21 +211,37 @@
 	let nicknameValidFlag = false;
 	
 	$("#nickname").on("keyup", function(){
-		let regexNick = /^[A-Za-z가-힣0-9]{2,12}$/;
+		let regexNick = /^[A-Za-z가-힣ㄱ-ㅎ0-9]{2,12}$/;
 		let nickname = $("#nickname").val();
 		
 		let resultNick = regexNick.exec(nickname);
 		
-		if(resultNick){
-			$(".nicknameValidCheck").html("");
-			nicknameValidFlag = true;
-		}else{
-			$(".nicknameValidCheck").html("<i class='bi bi-exclamation-circle'></i> 닉네임의 형식이 일치하지 않습니다.").css({"color":"red", "font-size":"small"});
-			nicknameValidFlag = false;
-		}
+		// 닉네임 중복 검사
+		$.ajax({
+			url:"/member/nicknameCheck",
+			type:"post",
+			dataType:"json",
+			data:{
+				nickname : nickname
+			}
+		}).done(function(resp){
+			if(resultNick != null && resp == false){
+				$(".nicknameValidCheck").html("");
+				nicknameValidFlag = true;
+			}else if(resultNick != null && resp == true){
+				$(".nicknameValidCheck").html("<i class='bi bi-exclamation-circle'></i> 이미 존재하는 닉네임입니다.").css({"color":"red", "font-size":"small"});
+				nicknameValidFlag = false;
+			}else{
+				$(".nicknameValidCheck").html("<i class='bi bi-exclamation-circle'></i> 닉네임의 형식이 일치하지 않습니다.").css({"color":"red", "font-size":"small"});
+				nicknameValidFlag = false;
+			}
+		})
 	})
 	
-	// 생년월일 숫자 입력
+	// 생년월일 숫자만 입력할 수 있도록 설정
+	function inputOnlyNumber(birthday){
+		birthday.value = birthday.value.replace(/[^0-9]/g, '');
+	}
 	
 	// 생년월일 유효성 검사
 	let birthdayValidFlag = false;

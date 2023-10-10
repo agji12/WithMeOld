@@ -29,4 +29,12 @@ public class MemberService {
 		return memberDAO.signIn(dto);
 	}
 	
+	public boolean emailCheck(String email) {
+		return memberDAO.emailCheck(email);
+	}
+	
+	public boolean nicknameCheck(String nickname) {
+		return memberDAO.nicknameCheck(nickname);
+	}
+	
 }

@@ -11,6 +11,14 @@
 	
 	<select id="signIn" resultType="boolean">
 		select count(*) from member where email=#{email} and password=#{password}
-	</select>	
+	</select>
+	
+	<select id="emailCheck" resultType="boolean">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<select id="nicknameCheck" resultType="boolean">
+		select count(*) from member where nickname=#{nickname}
+	</select>
 
 </mapper>

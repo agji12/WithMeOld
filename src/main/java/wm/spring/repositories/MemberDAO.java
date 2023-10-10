@@ -19,5 +19,13 @@ public class MemberDAO {
 	public boolean signIn(MemberDTO dto) {
 		return db.selectOne("Member.signIn", dto);
 	}
+	
+	public boolean emailCheck(String email) {
+		return db.selectOne("Member.emailCheck", email);
+	}
+	
+	public boolean nicknameCheck(String nickname) {
+		return db.selectOne("Member.nicknameCheck", nickname);
+	}
 
 }

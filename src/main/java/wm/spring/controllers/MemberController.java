@@ -30,8 +30,6 @@ public class MemberController {
 	// 로그인 창으로
 	@RequestMapping("toSignIn")
 	public String toSignIn(Model model) {
-		//boolean signInResult = true;
-		//model.addAttribute("signInResult", signInResult);
 		
 		return "/member/signIn";
 	}
@@ -62,14 +60,14 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping("signIn")
-	public String signIn(MemberDTO dto, RedirectAttributes redir) throws Exception {
-		boolean signInResult = memberService.signIn(dto);
+	public String signIn(MemberDTO dto, RedirectAttributes rttr) throws Exception {
+		boolean signInSuccess = memberService.signIn(dto);
 		
-		if(signInResult) {
+		if(signInSuccess) {
 			session.setAttribute("email", dto.getEmail());
 			return "redirect:/";			
 		}else {
-			redir.addFlashAttribute("signInResult", "false");
+			rttr.addFlashAttribute("signInSuccess", "false");
 			return "redirect:/member/toSignIn";
 		}
 	}
@@ -79,6 +77,20 @@ public class MemberController {
 	public String signOut() {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 이메일 중복 체크
+	@ResponseBody
+	@RequestMapping("emailCheck")
+	public boolean emailCheck(String email) {
+		return memberService.emailCheck(email);
+	}
+	
+	// 닉네임 중복 체크
+	@ResponseBody
+	@RequestMapping("nicknameCheck")
+	public boolean nicknameCheck(String nickname) {
+		return memberService.nicknameCheck(nickname);
 	}
 	
 	//예외처리
