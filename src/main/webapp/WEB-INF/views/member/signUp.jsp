@@ -29,19 +29,19 @@
 	</header>
 	<main>
 		<div class="mainContainer container-fluid shadow p-3 mb-5 bg-body-tertiary rounded">
-		<form action="/member/insertMember" method="post">
+		<form action="/member/signUp" method="post">
 			<h1>With Me 회원 가입</h1>
 			<div class="firstPage">
 				<div class="col-12 col-lg-8 mb-3 emailBox">
 					<label for="exampleFormControlInput1" class="form-label label">이메일 주소</label>
-					<input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+					<input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
 					<div class="emailValidCheck"></div>
 				</div>
 				<div class="col-12 col-lg-8 mb-3 authBox">
 					<label for="exampleFormControlInput1" class="form-label label">인증 번호</label>
 					<input type="text" class="form-control" id="authInput" placeholder="6자리 인증 번호를 입력해 주세요" aria-label="default input example">
 				</div>
-				<div class="mb-3 btnDiv">
+				<div class="col-12 col-lg-8 mb-3 btnDiv">
 					<button type="button" id="sendMailBtn" class="btn btn-primary" disabled>다음</button>
 					<button type="button" id="authBtn" class="btn btn-primary">인증하기</button>
 				</div>
@@ -59,7 +59,7 @@
 					<label for="inputPassword5" class="form-label">비밀번호 재입력</label>
 					<input type="password" id="passwordCheck" class="form-control password" aria-describedby="passwordHelpBlock">
 				</div>
-				<div class="mb-3 btnDiv">
+				<div class="col-12 col-lg-8 mb-3 btnDiv">
 					<button type="button" id="nextBtn" class="btn btn-primary" disabled>다음</button>
 				</div>
 			</div>
@@ -80,12 +80,12 @@
 					</div>
   					<div class="birthdayValidCheck"></div>
 				</div>
-				<div class="mb-3 btnDiv">
-					<button type="submit" id="joinBtn" class="btn btn-primary">가입하기</button>
+				<div class="col-12 col-lg-8 mb-3 btnDiv">
+					<button type="submit" id="signUpBtn" class="btn btn-primary">가입하기</button>
 				</div>
 			</div>
 			<div class="mb-3">
-				<a class="icon-link icon-link-hover" href="/member/toLogin">
+				<a class="icon-link icon-link-hover" href="/member/toSignIn">
  			 		다시 로그인하러 가기<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
   					<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
 					</svg>
@@ -253,7 +253,7 @@
 	})
 	
 	// 가입 버튼 눌렀을 때
-	$("#joinBtn").on("click", function(){
+	$("#signUpBtn").on("click", function(){
 		if(nicknameValidFlag == true && birthdayValidFlag == true){
 			return true;
 		}else{

@@ -5,8 +5,12 @@
 
 <mapper namespace="Member">
 	
-	<insert id="insertMember">
+	<insert id="signUp">
 		insert into member values(member_seq.nextval,#{email},#{password},#{nickname},#{birthday},sysdate)
-	</insert>		
+	</insert>
+	
+	<select id="signIn" resultType="boolean">
+		select count(*) from member where email=#{email} and password=#{password}
+	</select>	
 
 </mapper>

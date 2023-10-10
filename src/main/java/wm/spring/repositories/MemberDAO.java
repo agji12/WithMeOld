@@ -12,8 +12,12 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate db;
 	
-	public int insertMember(MemberDTO dto) {
-		return db.insert("Member.insertMember", dto);
+	public int signUp(MemberDTO dto) {
+		return db.insert("Member.signUp", dto);
+	}
+	
+	public boolean signIn(MemberDTO dto) {
+		return db.selectOne("Member.signIn", dto);
 	}
 
 }

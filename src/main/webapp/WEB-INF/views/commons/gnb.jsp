@@ -13,8 +13,17 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item"><a class="nav-link" href="/">홈</a></li>
-				<li class="nav-item"><a class="nav-link" href="#services">듀오 찾기</a></li>
-				<li class="nav-item"><a class="nav-link" href="/member/toLogin">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">듀오 찾기</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.email == null}">
+						<li class="nav-item"><a class="nav-link" href="/member/toSignIn">로그인</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/member/signOut">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
+				
 			</ul>
 		</div>
 	</div>
