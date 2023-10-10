@@ -81,7 +81,8 @@ src/main/resources/config
 src/main/resources/config/
 src/main/resources/config/**
 WithMe/src/main/resources/config/Mail.properties
-*.properties
+Mail.properties
+test2.properties
 
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
